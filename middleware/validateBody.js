@@ -1,21 +1,43 @@
-const {HttpError} = require('../helpers')
+const { HttpError } = require('../helpers')
 
-const validateBody = schema => {
-
+const validateBodyPut = schema => {
+  
   const func = (req, res, next) => {
+
     if (JSON.stringify(req.body) === "{}") {
-       next(HttpError(400, 'missing fields'))
+      next(HttpError(400, 'missing fields'))
     }
-      const { error } = schema.validate(req.body);
+    const { error } = schema.validate(req.body);
 
-        if (error) {
+    if (error) {
       next(HttpError(400, error.message))
-        }
-        next()
-}
-    
-    return func;
+    }
+    next()
+  }
+
+  return func;
 }
 
+const validateBodyPatch = schema => {
+  const func = (req, res, next) => {
 
-module.exports = validateBody
+    if (JSON.stringify(req.body) === "{}") {
+      next(HttpError(400, 'missing field favorite'))
+    }
+    const { error } = schema.validate(req.body);
+
+    if (error) {
+      next(HttpError(400, error.message))
+    }
+    next()
+  }
+
+  return func;
+}
+
+const validate = {
+  validateBodyPut,
+  validateBodyPatch
+}
+
+module.exports = validate
