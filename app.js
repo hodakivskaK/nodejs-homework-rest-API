@@ -3,6 +3,7 @@ const logger = require('morgan')
 const cors = require('cors')
 const dotenv = require('dotenv')
 const contactsRouter = require('./routes/api/contacts');
+const authRouter = require("./routes/api/auth")
 
 const app = express()
 dotenv.config()
@@ -15,7 +16,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api/contacts', contactsRouter)
-
+app.use('/api/auth', authRouter)
 
 
 app.use((req, res, next) => {
@@ -32,5 +33,3 @@ app.use((err, req, res, next) => {
 
 
 module.exports = app
-
-
