@@ -7,7 +7,7 @@ const ctrlWrapper = ctrl => {
         } 
     }
 
-    return func
+    return func;
 }
 
 
