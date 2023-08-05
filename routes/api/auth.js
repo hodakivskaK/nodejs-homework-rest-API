@@ -7,15 +7,15 @@ const {validate,  authenticate} = require('../../middleware')
 const { schemas } = require("../../models/user")
 
 // register
-router.post('/users/register', validate.validateBodyPut(schemas.registerSchema), ctrl.register)
+router.post('/register', validate.validateBodyPut(schemas.registerSchema), ctrl.register)
 
 // login
-router.post('/users/login', validate.validateBodyPut(schemas.loginSchema), ctrl.login)
+router.post('/login', validate.validateBodyPut(schemas.loginSchema), ctrl.login)
 
 // current token
-router.get('/users/current', authenticate,  ctrl.getCurrent)
+router.get('/current', authenticate,  ctrl.getCurrent)
 
 // logout
-router.post('/users/logout', authenticate, ctrl.logout)
+router.post('/logout', authenticate, ctrl.logout)
 
 module.exports = router;
