@@ -18,11 +18,16 @@ const userSchema = Schema({
     enum: ["starter", "pro", "business"],
     default: "starter"
   },
- 
+   avatarURL: {
+     type: String,
+     required: true,
+  },
+
   token: {
     String,
 
-   }
+  },
+
   
 }, {
   versionKey: false
@@ -41,6 +46,7 @@ const registerSchema = Joi.object({
       'any.required': `missing required email field`
     }),
   subscription: Joi.string(),
+  avatarURL: Joi.string(),
 })
 
 const loginSchema = Joi.object({
