@@ -7,7 +7,13 @@ const {validate,  authenticate, upload} = require('../../middleware')
 const { schemas } = require("../../models/user")
 
 // register
-router.post('/register',  validate.validateBodyPut(schemas.registerSchema), ctrl.register)
+router.post('/register', validate.validateBodyPut(schemas.registerSchema), ctrl.register)
+
+// verify 
+router.get('/verify/:verificationToken', ctrl.verifyEmail)
+
+// verify post 
+router.post('/verify', validate.validateBodyPut(schemas.verifySchema), ctrl.resendVerifyEmail)
 
 // login
 router.post('/login', validate.validateBodyPut(schemas.loginSchema), ctrl.login)

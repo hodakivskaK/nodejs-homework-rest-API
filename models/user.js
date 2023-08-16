@@ -4,6 +4,15 @@ const Joi = require('joi');
 const { handleMongooseError } = require('../helpers');
 
 const userSchema = Schema({
+   verify: {
+    type: Boolean,
+    default: false,
+  },
+  verificationToken: {
+    type: String,
+    required: [true, 'Verify token is required'],
+  },
+
   password: {
     type: String,
     required: [true, 'Set password for user'],
@@ -26,9 +35,7 @@ const userSchema = Schema({
   token: {
     String,
 
-  },
-
-  
+  },  
 }, {
   versionKey: false
 })
@@ -58,9 +65,16 @@ const loginSchema = Joi.object({
     }),
 })
 
+const verifySchema = Joi.object({
+   email: Joi.string().required().messages({
+      'any.required': `missing required field email`
+    }),
+})
+
 const schemas = {
   registerSchema,
-  loginSchema
+  loginSchema,
+  verifySchema
 }
 
 module.exports = {
